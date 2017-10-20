@@ -4,7 +4,6 @@ import datetime
 import sys
 import matplotlib.pyplot as plt
 name=input()
-#name='zhiznevsky'
 today = datetime.datetime.today()
 id =getid.GetId()
 id=id.response_handler(id._get_data(name))
