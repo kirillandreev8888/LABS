@@ -6,8 +6,8 @@ from librip.decorators import print_result
 from librip.gens import field, gen_random
 from librip.iterators import Unique as unique
 
-path = 'data_light.json'
-# path = sys.argv[1]
+# path = 'data_light.json'
+path = sys.argv[1]
 
 # Здесь необходимо в переменную path получить
 # путь до файла, который был передан при запуске
