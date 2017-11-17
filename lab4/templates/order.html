@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}3аказ № {{ order.id }}{% endblock %}
+{% block body %}
+    <style>
+        body {background-color: bisque;
+        }
+    </style>
+    <div class="text-center">
+    <p class= "bg-primary" style="font-size:50px;background-color: coral">
+        Страница заказа №{{ order.id }}
+    </p>
+    </div>
+     <div class="text-info" style="font-size: 35px">
+     Информация о заказе №{{ order.id }}
+    </div>
+    {% endblock %}
