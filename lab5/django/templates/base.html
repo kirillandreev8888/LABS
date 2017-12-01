@@ -1,0 +1,26 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+
+    <div>{% block head %}
+    {% endblock %}</div>
+<meta charset="UTF-8">
+
+<title>{% block title %}ggg{% endblock %}</title>
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="{% static "css/hasagi.css" %}" >
+</head>
+<body>
+
+<div>
+<style>
+        body {background-color:bisque;
+        }
+    </style>
+{% block body %}Переопределяется в наследниках{% endblock %} </div>
+</body>
+</html>
