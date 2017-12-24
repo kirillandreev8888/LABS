@@ -1,0 +1,47 @@
+/*@import colors_palete;*/
+body {
+	padding-top: 50px;
+	background-color: wheat;
+}
+.navbar-inverse {
+	background-color: coral;
+	border-color: #e86600;
+}
+.navbar-inverse .navbar-brand {
+ 	color: #ffd373;
+}
+.panels {
+	margin-top: 20px;
+	margin-left: 10px;
+	margin-right: 10px;
+	padding: 0px;
+	color: coral;
+}
+#main-panel {
+}
+#side-panel {
+	border-radius: 4px;
+	background-color: coral;
+	padding: 5px;
+	font-size: medium;
+}
+#side-panel a {
+    color: wheat;
+}
+
+.btn{
+	background-color: wheat;
+	border-color: black;
+	color: black;
+	;
+}
+
+.btn:hover{
+	background-color: coral;
+	border-color: black;
+	color: black;
+	;
+}
+
+
+

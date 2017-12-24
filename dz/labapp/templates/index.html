@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}Стартовая страница{% endblock %}
+{% block main_block %}
+{% if not user.is_authenticated %}
+<h1>Зарегистрируйтесь или войдите в систему</h1>
+{% else %}
+{#<h1 style="text-align:center">Меню</h1>#}
+<div class="main_block_elem" style="font-size: 20px">
+	Добро пожаловать, {{ user.username }}! Выберите интересующий вас пункт в меню сверху, чтобы отобразить соответствующую информацию.
+</div>
+{% endif %}
+{% endblock %}

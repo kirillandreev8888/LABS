@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Пользователи{% endblock %}
+
+{% block main_block %}
+    {% if user.is_superuser %}
+        <h1 style="text-align: center">Пользователи</h1>
+        {% for user in object_list %}
+            <div class="main_block_elem">
+                <h2>{{ user.first_name }} {{ user.last_name }}</h2>
+                username: {{ user.user.username }}<br>
+                email: {{ user.user.email }}<br>
+            </div>
+        {%  empty %}
+            <div class="main_block_elem">
+                <h2>Пока ни одного пользователя</h2>
+            </div>
+        {% endfor %}
+    {% else %}
+        <div style="font-size: 20px">К сожалению, у вас нет прав на просмотр этой информации.</div>
+    {% endif %}
+{% endblock %}
