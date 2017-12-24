@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Отзывы{% endblock %}
+
+{% block main_block %}
+<h1 style="text-align: center">Отзывы</h1>
+{% for rev in object_list %}
+    <div class="main_block_elem">
+        <h2>{{ rev.user.last_name }} {{ rev.user.first_name }} - {{ rev.film.name }}</h2>
+        Дата: {{ rev.review_date }}<br>
+        Рейтинг: {{ rev.rating }}<br>
+        Отзыв: {{ rev.review_content }}
+    </div>
+{%  empty %}
+    <div class="main_block_elem">
+        <h2>Пока ни одного отзыва</h2>
+    </div>
+{% endfor %}
+{% endblock %}

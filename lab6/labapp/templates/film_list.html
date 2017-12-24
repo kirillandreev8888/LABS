@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}Фильмы{% endblock %}
+
+{% block main_block %}
+<h1 style="text-align: center">Фильмы</h1>
+{% for film in object_list %}
+    <div class="main_block_elem">
+        <h2>{{ film.name }}</h2>
+        <div class="main_block_elem_content">
+            Жанр: {{ film.genre }}<br>
+            {% if film.description is not Null %}
+            Описание: {{ film.description }}
+        </div>
+        {% endif %}
+    </div>
+{%  empty %}
+    <div class="main_block_elem">
+        <h2>Пока ни одного фильма</h2>
+    </div>
+{% endfor %}
+{#    <button onclick="window.location.href=' ?page=1'"> << </button>#}
+{#    <button onclick="window.location.href=' ?page=2'"> >> </button>#}
+    <div class="pagination">
+
+        {% if paginator.num_pages > 1 %}
+            {% if page_obj.has_previous %}
+{#                <a href="?page={{ page_obj.previous_page_number }}">&larr;</a>#}
+                <button onclick="window.location.href=' ?page='+{{ page_obj.previous_page_number }}"> << </button>
+            {% endif %}
+            <span class="current_page">{{ paginator.number }}</span>
+            {% if page_obj.has_next %}
+{#                <a href="?page={{ page_obj.next_page_number }}">&rarr;</a>#}
+                <button onclick="window.location.href=' ?page='+{{ page_obj.next_page_number }}"> >> </button>
+            {% endif %}
+        {% endif %}
+
+    </div>
+    <br>
+    <button onclick="window.location.href='/labs/add_film'"> + </button>
+
+
+{% endblock %}
