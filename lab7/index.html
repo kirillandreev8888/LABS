@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Построитель графиков</title>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.js"></script>
+    <script type="text/javascript" src="index.js"></script>
+    <style>
+        body{
+            margin-left: 0px;
+            margin-top: 0px;
+            background-color: wheat;
+        }
+
+    </style>
+</head>
+<body>
+
+<h1 style="margin-left: 0px; margin-top: 0px; background-color: coral; font-family: Verdana; text-align: center"; >Построитель графиков</h1>
+<div style="margin-left: 10px">
+    <div>Границы отображения</div>
+    <input type="text" class="from" size ="10" value="-10" style="text-align: center"></input> | <input type="text" class="to" size ="10" value="10" style="text-align: center"></input><br>
+    Введите функцию<br>
+    <input type="text" class="fun" style="text-align: center"></input> <br>
+    <label><input type="checkbox" id="iddd" />Осциллограф?</label><br>
+    <button style="color: red; margin-top: 10px; height: 30px">Построить график</button><br>
+    <div class="plot1" style="width: 400px; height: 200px; margin-top: 5px"></div>
+</div>
+
+</body>
+</html>
