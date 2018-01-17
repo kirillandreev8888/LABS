@@ -43,5 +43,13 @@ body {
 	;
 }
 
+.film_picture{
+	float: left;
+	width: 30%;
+	height: 170px;
+	margin-top: 0px;
+}
+
+
 
 

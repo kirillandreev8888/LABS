@@ -1,9 +1,9 @@
 {% extends "base.html" %}
-{% block title %}Добавление фильма{% endblock %}
+{% block title %}Добавление отзыва{% endblock %}
 {% block main_block %}
 <div class="main_block_elem">
-<form enctype="multipart/form-data" method="POST" class="form-horizontal">
-    <h2 style="text-align:center">Добавление фильма</h2>
+<form method="POST" class="form-horizontal">
+    <h2 style="text-align:center">Добавление отзыва</h2>
     {% csrf_token %}
     {% for field in form %}
         {% for error in field.errors %}

@@ -6,7 +6,11 @@ from django.contrib.auth import authenticate,login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import  *
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from . import models
+
+from django.views.generic import DetailView
+from datetime import datetime, date, time
+
 
 class UserList(LoginRequiredMixin, ListView):
     login_url = '/labs/'
@@ -20,7 +24,7 @@ class FilmList(LoginRequiredMixin, ListView):
     model = Film
     template_name = 'film_list.html'
 
-    paginate_by = 3
+    paginate_by = 4
 
 
 
@@ -168,15 +172,20 @@ def index(request):
 def index2(request):
     return HttpResponseRedirect('/labs/')
 
-class FilmAddForm(forms.Form):
+class FilmAddForm(forms.ModelForm):
     name = forms.CharField(min_length=5,label='Название')
     genre = forms.CharField(label='Жанр')
     description = forms.CharField(label='Описание')
+    img = forms.FileField(label='Изображение', required=False)
+
+    class Meta:
+        model=models.Film
+        fields = ('name', 'genre', 'description', 'img')
 
 
 def add_film(request):
     if request.method == 'POST':
-        form = FilmAddForm(request.POST)
+        form = FilmAddForm(request.POST, request.FILES)
         is_val = form.is_valid()
         data = form.cleaned_data
         if Film.objects.filter(name=data['name']).exists():
@@ -185,15 +194,60 @@ def add_film(request):
 
         if is_val:
             data = form.cleaned_data
-            flm = Film()
-            flm.name = data['name']
-            flm.genre = data['genre']
-            flm.description = data['description']
-            flm.save()
+            # flm = Film()
+            # flm.name = data['name']
+            # flm.genre = data['genre']
+            # flm.description = data['description']
+            # flm.img = request.FILES['img']
+            # flm.save()
+            # flm = form.save(commit=False)
+            # flm.save()
+            form.save()
             return HttpResponseRedirect('/labs/films')
     else:
         form = FilmAddForm()
 
     return render(request, 'add_film.html',{'form':form})
+
+class film_view(DetailView):
+    model = Film
+    context_object_name = 'film'
+    template_name = 'film_view.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(film_view, self).get_context_data(**kwargs)
+        context['review'] = Review.objects.all()
+        context['userus'] = Userus.objects.all()
+        # print(context)
+        return context
+
+# def add_review(request, film_id):
+#     if request.method == "POST":
+#         film = Film.objects.get(id=film_id)
+CHOICES=[('0','Очень плохо'),('1','Плохо'),('2','Так себе'),('3','Неплохо'),('4','Хорошо'),('5','Отлично!')]
+class ReviewAddForm(forms.Form):
+    rating = forms.ChoiceField(choices=CHOICES, widget=forms.RadioSelect(), label='Ваш рейтинг фильма')
+    review_content = forms.CharField(label='Текст отзыва')
+    
+def add_review(request, film_id):
+    if request.method == "POST":
+        form = ReviewAddForm(request.POST)
+        is_val = form.is_valid()
+        data = form.cleaned_data
+        if is_val:
+            data = form.cleaned_data
+            rev = Review()
+            rev.rating = data['rating']
+            rev.review_content = data['review_content']
+            rev.film_id = film_id
+            rev.user_id = request.user.id
+            rev.review_date=datetime.now().date()
+            rev.save()
+        return HttpResponseRedirect('/labs/film/'+film_id)
+    else:
+        form = ReviewAddForm()
+
+    return render(request, 'add_review.html',{'form':form})
+
 
 

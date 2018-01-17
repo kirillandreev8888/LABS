@@ -4,15 +4,36 @@
 {% block main_block %}
 <h1 style="text-align: center">Фильмы</h1>
 {% for film in object_list %}
-    <div class="main_block_elem">
-        <h2>{{ film.name }}</h2>
-        <div class="main_block_elem_content">
-            Жанр: {{ film.genre }}<br>
-            {% if film.description is not Null %}
-            Описание: {{ film.description }}
+
+{#    <div class="main_block_elem" style="height: 180px">#}
+{#        <h2><a href="/labs/film/{{ film.id }}">{{  film.name}}</a></h2>#}
+{#        <div class = film_picture1 style="float: left; height: 150px; width:18%">#}
+{#            <img src = "{{ film.img.url }}" style="height: 100%"/>#}
+{#        </div>#}
+{#        <div class="main_block_elem_content" style="float: left; height: 150px; width: 82%">#}
+{#            Жанр: {{ film.genre }}<br>#}
+{#            {% if film.description is not Null %}#}
+{#            Описание: {{ film.description }} <br>#}
+{#            {% load staticfiles %}#}
+{##}
+{#        </div>#}
+{#        {% endif %}#}
+{#    </div>#}
+
+    <div class="col s12 m7" style="width: 1000px">
+    <div class="card horizontal" style="height: 250px">
+      <div class="card-image" style="height: 250px">
+          <a href="/labs/film/{{ film.id }}"><img style="height: 100%" src="{{ film.img.url }} "></a>
+      </div>
+      <div class="card-stacked" style="background-color: #fbe9c8">
+        <div class="card-content" style="font-size: 20px    ">
+          <h2 style="font-size: 50px">{{ film.name }}</h2>
+          <p>Жанр: {{ film.genre }}</p>
+          <p>Описание: {{ film.description }}</p>
         </div>
-        {% endif %}
+      </div>
     </div>
+  </div>
 {%  empty %}
     <div class="main_block_elem">
         <h2>Пока ни одного фильма</h2>
@@ -20,23 +41,24 @@
 {% endfor %}
 {#    <button onclick="window.location.href=' ?page=1'"> << </button>#}
 {#    <button onclick="window.location.href=' ?page=2'"> >> </button>#}
+<div style="float: left">
     <div class="pagination">
 
         {% if paginator.num_pages > 1 %}
             {% if page_obj.has_previous %}
 {#                <a href="?page={{ page_obj.previous_page_number }}">&larr;</a>#}
-                <button onclick="window.location.href=' ?page='+{{ page_obj.previous_page_number }}"> << </button>
+                <button onclick="window.location.href=' ?page='+{{ page_obj.previous_page_number }}"> << Предыдущая </button>
             {% endif %}
             <span class="current_page">{{ paginator.number }}</span>
             {% if page_obj.has_next %}
 {#                <a href="?page={{ page_obj.next_page_number }}">&rarr;</a>#}
-                <button onclick="window.location.href=' ?page='+{{ page_obj.next_page_number }}"> >> </button>
+                <button onclick="window.location.href=' ?page='+{{ page_obj.next_page_number }}"> Следующая >> </button>
             {% endif %}
         {% endif %}
 
     </div>
     <br>
-    <button onclick="window.location.href='/labs/add_film'"> + </button>
-
+    <button style="margin-bottom: 15px" onclick="window.location.href='/labs/add_film'"> Добавить фильм </button>
+</div>
 
 {% endblock %}

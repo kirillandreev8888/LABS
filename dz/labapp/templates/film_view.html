@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block title %}{{ film.name }}{% endblock %}
+
+{% block main_block %}
+
+<div style="width: 1267px">
+    {% load staticfiles %}
+    <img src = "{{ film.img.url }}" style=" width: 30%; height: 30%; float: left"/>
+
+
+    <div class="main_block_elem" style="float: left; width: 60%; margin-left: 30px; font-size: 25px">
+        <h2 style="font-size: 100px; font-family: 'Verdana'; margin-top: -10px">{{ film.name }}</h2>
+        <div class="main_block_elem_content">
+            Жанр: {{ film.genre }}<br>
+            {% if film.description is not Null %}
+            Описание: {{ film.description }} <br>
+        </div>
+        {% endif %}
+    </div>
+</div>
+    <div class="kostil_button" style="float: left; width: 100%; margin-bottom: 10px; margin-top: 10px">
+    <button onclick="window.location.href='/labs/add_review/'+{{ film.id }}"> Добавить отзыв </button>
+    </div>
+    <p style="font-size: 25px; width: 100%; float: left">Отзывы:</p>
+    <div class = film_reviews style="float: left">
+    {% for rev in review %}
+        {% if rev.film_id == film.id %}
+{#        <div class="single_review" style="outline: dotted; padding: 5px; width: 100%">#}
+{##}
+{#            {% for usr in userus %}#}
+{#                {% if usr.id == rev.user_id %}#}
+{#                    <p> Никнейм: {{ usr.nickname }}</p>#}
+{#                {% endif %}#}
+{#            {% endfor %}#}
+{#            <p> Дата: {{ rev.review_date }} </p>#}
+{#            <p> Оценка: {{ rev.rating }} </p>#}
+{#            <p style="font-size: 15px"> Отзыв: {{ rev.review_content }} </p>#}
+{##}
+{#        </div>#}
+        <div class="col s12 m7" style="width: 1000px; outline: dotted">
+            <div class="card horizontal" style="height: 150px">
+              <div class="card-stacked" style="background-color: #fbe9c8">
+                <div class="card-content" style="font-size: 20px    ">
+                    {% for usr in userus %}
+                        {% if usr.id == rev.user_id %}
+                            <p> <b>Никнейм:</b> {{ usr.nickname }}</p>
+                        {% endif %}
+                    {% endfor %}
+                    <p> <b>Дата:</b> {{ rev.review_date }} </p>
+                    <p> <b>Оценка:</b> {{ rev.rating }} </p>
+                    <p> <b>Отзыв:</b> {{ rev.review_content }} </p>
+                </div>
+              </div>
+            </div>
+        </div>
+        {% endif %}
+
+    {% endfor %}
+    </div>
+
+
+{% endblock %}

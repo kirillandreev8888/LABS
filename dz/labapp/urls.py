@@ -2,6 +2,13 @@ from django.conf.urls import url
 
 from . import views
 
+from django.conf.urls import url, include
+from django.conf.urls.static import static
+from django.conf import settings
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from .models import *
+from django.views.generic import DetailView
+
 urlpatterns = [
     url(r'^logout$', views.logout_view, name='logout'),
     url(r'^success_authorization_dumb$', views.success_authorization_dumb, name='success_authorization_dumb'),
@@ -14,4 +21,9 @@ urlpatterns = [
     url(r'^films/$',views.FilmList.as_view(),name='film_list'),
     url(r'^reviews/$',views.ReviewList.as_view(),name='review_list'),
     url(r'^$', views.index, name='index'),
+    url(r'^film/(?P<pk>\d+)$', views.film_view.as_view(), name='film_view'),
+    url(r'^add_review/(?P<film_id>[A-Za-z0-9- ]+)$', views.add_review, name='add_review')
 ]
+
+urlpatterns += staticfiles_urlpatterns()
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

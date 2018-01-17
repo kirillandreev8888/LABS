@@ -16,8 +16,9 @@ class Film(models.Model):
     name = models.CharField(max_length=30)
     genre = models.CharField(max_length=30)
     description = models.CharField(max_length=255,null=True)
+    img = models.FileField(upload_to='images', default='images/def.jpg')
 
-    objects = models.Manager()
+    # objects = models.Manager()
 
 class Review(models.Model):
     user = models.ForeignKey(Userus, on_delete=models.CASCADE)
